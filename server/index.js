@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Basic health check
 app.get('/api/health', (req, res) => {
-  res.status(200).json({'OK', timestamp: new Date().toISOString()});
+  res.status(200).json({status: 'OK', timestamp: new Date().toISOString()});
 });
 
 // use router handlers
