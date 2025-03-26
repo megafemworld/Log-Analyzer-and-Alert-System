@@ -1,0 +1,3 @@
+{"level":"info","message":"Server is running on port 3000","service":"server","timestamp":"2025-03-26T20:34:57.825Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-26T20:34:57.834Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-26T20:34:57.839Z"}

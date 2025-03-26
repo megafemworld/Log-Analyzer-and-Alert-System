@@ -2,7 +2,7 @@ import express from 'express';
 import { getAlerts, acknowledgeAlert } from '../ingestion/processor.js';
 import { createLogger } from '../utils/logger.js';
 
-const router = express.Router;
+const router = express.Router();
 const logger = createLogger('alerts-api');
 
 // Route to get alerts

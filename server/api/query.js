@@ -1,5 +1,5 @@
 import express from 'express';
-import { queryLogs, getLogStats } from './ingestion/processor.js';
+import { queryLogs, getLogStats } from '../ingestion/processor.js';
 import { createLogger } from '../utils/logger.js';
 
 const router = express.Router();

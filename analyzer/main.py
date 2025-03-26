@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import time
 from datetime import datetime
 import requests
 from models.log_analyzer import LogAnalyzer
@@ -27,7 +28,8 @@ def main():
                 response = requests.get(
                     f"{NODE_SERVER_URL}/api/query/recent",
                     params={'limit': 10},
-                    tiemout=10)
+                    timeout=10
+                )
                 
                 if response.status_code != 200:
                     print(f"Failed to get logs: HTTP {response.status_code}")
@@ -61,7 +63,7 @@ def main():
                 time.sleep(POLL_INTERVAL)
             
             except requests.exceptions.RequestException as e:
-                print(f"Request erro: {str(e)}")
+                print(f"Request error: {str(e)}")
                 time.sleep(POLL_INTERVAL * 2)
             
             except Exception as e:

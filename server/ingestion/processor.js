@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
-import { createLogger } from '../utils/logger';
+import { createLogger } from '../utils/logger.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -205,7 +205,7 @@ export const getAlerts = async (options = {}) => {
  * @param {string} alertId - Alert ID
  * @returns {Promise<boolean>} - Success or failure
  */
-export default acknowledgeAlert = async (alertId) => {
+export const acknowledgeAlert = async (alertId) => {
     const alert = alerts.find(a => a.id === alertId);
 
     if (alert) {
