@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:25.623Z",
+  "source": "payment-gateway",
+  "type": "warning",
+  "message": "File uploaded successfully (ID: 149)",
+  "user": "user-32",
+  "requestId": "fcfd04e5-2107-4cee-bfdb-104dbfba5b53",
+  "id": "1c2343a1-0d67-4a6e-b979-c45a1708ce53"
+}

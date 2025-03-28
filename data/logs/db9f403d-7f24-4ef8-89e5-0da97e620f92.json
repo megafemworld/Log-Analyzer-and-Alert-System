@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:26.860Z",
+  "source": "web-server",
+  "type": "error",
+  "message": "Invalid input received (ID: 38)",
+  "user": "user-38",
+  "requestId": "4fa92115-c78f-4868-a2eb-1756b1f2bc7b",
+  "id": "db9f403d-7f24-4ef8-89e5-0da97e620f92"
+}

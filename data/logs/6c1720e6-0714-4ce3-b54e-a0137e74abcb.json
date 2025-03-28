@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:27.074Z",
+  "source": "payment-gateway",
+  "type": "error",
+  "message": "Connection timeout",
+  "user": "user-71",
+  "requestId": "64135303-f19a-49d7-9ed7-4688bd51c4c5",
+  "id": "6c1720e6-0714-4ce3-b54e-a0137e74abcb"
+}

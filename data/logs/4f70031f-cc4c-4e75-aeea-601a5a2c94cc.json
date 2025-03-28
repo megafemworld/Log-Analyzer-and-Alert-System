@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:25.832Z",
+  "source": "database",
+  "type": "warning",
+  "message": "User login successful (ID: 279)",
+  "user": "user-45",
+  "requestId": "999659c6-0887-48ce-9e81-c56f2df792e1",
+  "id": "4f70031f-cc4c-4e75-aeea-601a5a2c94cc"
+}

@@ -1,9 +1,10 @@
 import { v4 as uuid4 } from 'uuid';
 import fs from 'fs/promises';
-import path from 'path';
+import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
 import { createLogger } from '../utils/logger.js';
+import ffi from 'ffi-napi';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -29,6 +30,18 @@ const ensureDirectories = async () => {
 };
 
 ensureDirectories();
+
+// Load the C library
+const logProcessor = ffi.Library(path.join(__dirname, '../../processor/build/liblogprocessor'), {
+    'init_log_processor': ['int', []],
+    'clean_up_processor': ['void', []],
+    'process_log_entry': ['int', ['pointer']],
+    'get_log_stats': ['int', ['pointer']],
+    // Add other functions as needed
+});
+
+// Initiliaze the C log Processor
+logProcessor.init_log_processor();
 
 /**
  * Process an incoming log entry
@@ -59,13 +72,19 @@ export const processLog = async (logData) => {
 
     await fs.writeFile(logFilePath, JSON.stringify(logData, null, 2));
 
-    // TODO: Here we would call the C module for processing
-    // For now, we'll just simulate this
-    const processingResult = await simulateProcessing(logData);
+    // Call the C module for processing
+    const entryBuffer = Buffer.alloc(4 * 1024); // adjust size as needed
+    entryBuffer.write(JSON.stringify(logData));
+    const processingResult = logProcessor.process_log_entry(entryBuffer);
 
-    // TODO: send to Python for analysis
-    // For now, we'll just simulate this
-    const analysisResult = await simulateAnalysis(logData);
+    // Handke the processing result
+    if (processingResult !== 0) {
+        throw new Error['C module processing failed'];
+    }
+
+
+    // Send to python to analysis
+    const analysisResult = await analyzeLogWithPython(logData);
 
     // Create an alert if the anomaly scroe if high enough
     if (analysisResult.anomalyScore > 0.7) {
@@ -256,3 +275,36 @@ const getSeverity = (logData) => {
             return 'info';
         }
 };
+
+/**
+ * ANanlyze log with python analyzer
+ * @param {Object} logData - Log data to analyze
+ * @returns {Promise<Object} - Analysis result
+ */
+
+const analyzeLogWithPython = (logData) => {
+    return new Promise((resolve, reject) => {
+        const pythonProcess = spawn('python3', [path.join(__dirname, '../../analyzer/main.py'), JSON.stringify(logData)]);
+
+        let output = '';
+        pythonProcess.stdout.on('data', (data) => {
+            output += data.toString();
+        });
+
+        pythonProcess.strerr.on('data', (data) => {
+            logger.error(`Python stderr: ${data}`);
+        });
+
+        pythonProcess.on('close', (code) => {
+            if (code !== 0) {
+                return reject(new Error(`Python process exited with code ${code}`));
+            }
+            resolve(JSON.parse(output));
+        })
+    })
+}
+
+// Ensure cleanup of the C module on exit
+process.on('exit', () => {
+    logProcessor.clean_up_processor();
+})

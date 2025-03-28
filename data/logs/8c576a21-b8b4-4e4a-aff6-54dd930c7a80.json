@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:22.468Z",
+  "source": "payment-gateway",
+  "type": "info",
+  "message": "Message sent successfully (ID: 519)",
+  "user": "user-16",
+  "requestId": "4f0c15aa-808e-4990-bbe9-c6ecc6137109",
+  "id": "8c576a21-b8b4-4e4a-aff6-54dd930c7a80"
+}

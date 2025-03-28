@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:27.181Z",
+  "source": "database",
+  "type": "error",
+  "message": "Connection timeout",
+  "user": "user-84",
+  "requestId": "5565fc91-e09e-43b2-9e15-88e6e8a93077",
+  "id": "8159cc8b-be18-474f-a46f-ff1e625955e4"
+}

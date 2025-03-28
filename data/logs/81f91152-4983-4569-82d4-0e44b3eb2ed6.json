@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:24.804Z",
+  "source": "auth-service",
+  "type": "error",
+  "message": "Segmentation fault detected (ID: 277)",
+  "user": "user-7",
+  "requestId": "6f49827b-b8af-421c-9156-27413772552d",
+  "id": "81f91152-4983-4569-82d4-0e44b3eb2ed6"
+}

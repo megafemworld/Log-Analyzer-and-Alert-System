@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:21.785Z",
+  "source": "web-server",
+  "type": "warning",
+  "message": "Cache refreshed (ID: 819)",
+  "user": "user-47",
+  "requestId": "49b9a530-12dc-4bbc-9255-4af99dc55e56",
+  "id": "99635a3b-821e-4ae3-9fbf-b819f6bd1bac"
+}

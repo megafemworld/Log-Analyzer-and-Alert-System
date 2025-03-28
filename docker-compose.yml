@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  log-analyzer:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - log-data:/app/data
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+
+volumes:
+  log-data:

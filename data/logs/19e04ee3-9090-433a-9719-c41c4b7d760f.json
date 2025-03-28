@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:25.212Z",
+  "source": "user-service",
+  "type": "warning",
+  "message": "User login successful (ID: 809)",
+  "user": "user-97",
+  "requestId": "6a77e126-f90c-4d02-a5c8-554e991eec79",
+  "id": "19e04ee3-9090-433a-9719-c41c4b7d760f"
+}

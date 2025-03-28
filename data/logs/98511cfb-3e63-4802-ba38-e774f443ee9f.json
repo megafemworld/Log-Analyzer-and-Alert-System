@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:25.008Z",
+  "source": "auth-service",
+  "type": "warning",
+  "message": "Cache refreshed (ID: 669)",
+  "user": "user-39",
+  "requestId": "df03dbf3-c522-474b-a534-861c199a46ef",
+  "id": "98511cfb-3e63-4802-ba38-e774f443ee9f"
+}

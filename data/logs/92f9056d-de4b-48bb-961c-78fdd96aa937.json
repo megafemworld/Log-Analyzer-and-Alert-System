@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:25.416Z",
+  "source": "payment-gateway",
+  "type": "info",
+  "message": "API request completed (ID: 886)",
+  "user": "user-67",
+  "requestId": "24ee0a40-16ea-4f1c-930d-111382f0da2b",
+  "id": "92f9056d-de4b-48bb-961c-78fdd96aa937"
+}

@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:26.450Z",
+  "source": "web-server",
+  "type": "error",
+  "message": "Connection timeout (ID: 666)",
+  "user": "user-37",
+  "requestId": "263cf750-7abf-426c-b914-f77cc7870aaf",
+  "id": "27dde963-874e-40be-abeb-28062bbeafe7"
+}

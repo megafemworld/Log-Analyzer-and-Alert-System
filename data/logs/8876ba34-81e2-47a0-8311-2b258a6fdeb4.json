@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:00:26.653Z",
+  "source": "payment-gateway",
+  "type": "error",
+  "message": "Segmentation fault detected (ID: 958)",
+  "user": "user-55",
+  "requestId": "91a3f014-146a-451b-b5f9-8a400ea5e6a0",
+  "id": "8876ba34-81e2-47a0-8311-2b258a6fdeb4"
+}
