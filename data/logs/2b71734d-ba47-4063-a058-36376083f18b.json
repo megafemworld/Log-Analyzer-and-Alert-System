@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-28T08:14:35.910Z",
+  "source": "user-service",
+  "type": "warning",
+  "message": "Configuration loaded (ID: 646)",
+  "user": "user-27",
+  "requestId": "01c5e5c9-5307-4506-a7c0-bfeb5330191a",
+  "id": "2b71734d-ba47-4063-a058-36376083f18b"
+}

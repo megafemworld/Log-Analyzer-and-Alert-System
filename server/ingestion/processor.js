@@ -1,10 +1,10 @@
 import { v4 as uuid4 } from 'uuid';
 import fs from 'fs/promises';
-import path, { resolve } from 'path';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
 import { createLogger } from '../utils/logger.js';
-import ffi from 'ffi-napi';
+import * as cProcessor from './c_processor.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -32,16 +32,16 @@ const ensureDirectories = async () => {
 ensureDirectories();
 
 // Load the C library
-const logProcessor = ffi.Library(path.join(__dirname, '../../processor/build/liblogprocessor'), {
-    'init_log_processor': ['int', []],
-    'clean_up_processor': ['void', []],
-    'process_log_entry': ['int', ['pointer']],
-    'get_log_stats': ['int', ['pointer']],
-    // Add other functions as needed
-});
+// const logProcessor = ffi.Library(path.join(__dirname, '../../processor/build/liblogprocessor'), {
+//     'init_log_processor': ['int', []],
+//     'clean_up_processor': ['void', []],
+//     'process_log_entry': ['int', ['pointer']],
+//     'get_log_stats': ['int', ['pointer']],
+//     // Add other functions as needed
+// });
 
 // Initiliaze the C log Processor
-logProcessor.init_log_processor();
+// logProcessor.init_log_processor();
 
 /**
  * Process an incoming log entry
@@ -72,16 +72,25 @@ export const processLog = async (logData) => {
 
     await fs.writeFile(logFilePath, JSON.stringify(logData, null, 2));
 
-    // Call the C module for processing
-    const entryBuffer = Buffer.alloc(4 * 1024); // adjust size as needed
-    entryBuffer.write(JSON.stringify(logData));
-    const processingResult = logProcessor.process_log_entry(entryBuffer);
+    try {
+        // try to use the C module
+        const result = cProcessor.processLogEntry(logData);
 
-    // Handke the processing result
-    if (processingResult !== 0) {
-        throw new Error['C module processing failed'];
+        if (result === 0) {
+            logger.info(`Log processed by C module: ${logId}`);
+        } else {
+            logger.warn(`C module processing failed with code ${result} using fallback`);
+        }
+    } catch (error) {
+        logger.error(`Error using C module: ${error.message}`);
     }
 
+    // Simulate C procesing for now (as fallback)
+    const processingResult = {
+        proccessed: true,
+        severity: getSeverity(logData),
+        wordCount: logData.message ? logData.message.split(/\s+/).length: 0
+    };
 
     // Send to python to analysis
     const analysisResult = await analyzeLogWithPython(logData);
@@ -282,7 +291,7 @@ const getSeverity = (logData) => {
  * @returns {Promise<Object} - Analysis result
  */
 
-const analyzeLogWithPython = (logData) => {
+const analyzeLogWithPython = async (logData) => {
     return new Promise((resolve, reject) => {
         const pythonProcess = spawn('python3', [path.join(__dirname, '../../analyzer/main.py'), JSON.stringify(logData)]);
 
@@ -303,8 +312,3 @@ const analyzeLogWithPython = (logData) => {
         })
     })
 }
-
-// Ensure cleanup of the C module on exit
-process.on('exit', () => {
-    logProcessor.clean_up_processor();
-})

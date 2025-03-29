@@ -70,3 +70,24 @@
 {"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-28T08:06:24.704Z"}
 {"level":"info","message":"Server is running on port 3000","service":"server","timestamp":"2025-03-28T08:06:24.697Z"}
 {"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-28T08:06:24.704Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-28T08:14:23.020Z"}
+{"level":"info","message":"Server is running on port 3000","service":"server","timestamp":"2025-03-28T08:14:23.012Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-28T08:14:23.021Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-29T09:51:29.805Z"}
+{"level":"info","message":"Server is running on port 3000","service":"server","timestamp":"2025-03-29T09:51:29.796Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-29T09:51:29.806Z"}
+{"level":"error","message":"Error ingesting log: logProcessor is not defined","service":"ingest-api","stack":"ReferenceError: logProcessor is not defined\n    at processLog (file:///home/megafemgroup/Log-Analyzer-and-Alert-System/server/ingestion/processor.js:78:30)\n    at async file:///home/megafemgroup/Log-Analyzer-and-Alert-System/server/api/ingest.js:19:24","timestamp":"2025-03-29T09:52:14.495Z"}
+{"level":"info","message":"Loading C library from /home/megafemgroup/Log-Analyzer-and-Alert-System/processor/build/liblogprocessor","service":"c-processor","timestamp":"2025-03-29T12:28:02.731Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-29T12:28:02.800Z"}
+{"level":"info","message":"Server is running on port 3000","service":"server","timestamp":"2025-03-29T12:28:02.790Z"}
+{"level":"info","message":"Initializing C log processor","service":"c-processor","timestamp":"2025-03-29T12:28:02.775Z"}
+{"level":"info","message":"Initialization result: 0","service":"c-processor","timestamp":"2025-03-29T12:28:02.778Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-29T12:28:02.801Z"}
+{"level":"info","message":"Loading C library from /home/megafemgroup/Log-Analyzer-and-Alert-System/processor/build/liblogprocessor","service":"c-processor","timestamp":"2025-03-29T12:30:02.207Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-29T12:30:02.255Z"}
+{"level":"info","message":"Server is running on port 3000","service":"server","timestamp":"2025-03-29T12:30:02.249Z"}
+{"level":"info","message":"Initializing C log processor","service":"c-processor","timestamp":"2025-03-29T12:30:02.238Z"}
+{"level":"info","message":"Initialization result: 0","service":"c-processor","timestamp":"2025-03-29T12:30:02.240Z"}
+{"level":"info","message":"Log directory created or already exist","service":"log-processor","timestamp":"2025-03-29T12:30:02.256Z"}
+{"level":"info","message":"Log processed by C module: f56f7117-cc89-41d8-b41c-5def5d64629d","service":"log-processor","timestamp":"2025-03-29T12:30:52.582Z"}
+{"level":"error","message":"Error ingesting log: Cannot read properties of undefined (reading 'on')","service":"ingest-api","stack":"TypeError: Cannot read properties of undefined (reading 'on')\n    at file:///home/megafemgroup/Log-Analyzer-and-Alert-System/server/ingestion/processor.js:303:30\n    at new Promise (<anonymous>)\n    at analyzeLogWithPython (file:///home/megafemgroup/Log-Analyzer-and-Alert-System/server/ingestion/processor.js:295:12)\n    at processLog (file:///home/megafemgroup/Log-Analyzer-and-Alert-System/server/ingestion/processor.js:96:34)\n    at async file:///home/megafemgroup/Log-Analyzer-and-Alert-System/server/api/ingest.js:19:24","timestamp":"2025-03-29T12:30:52.587Z"}
