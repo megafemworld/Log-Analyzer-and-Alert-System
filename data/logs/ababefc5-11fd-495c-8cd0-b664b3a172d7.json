@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-03-29T13:02:56.948Z",
+  "source": "auth-service",
+  "type": "error",
+  "message": "Invalid input received (ID: 126)",
+  "user": "user-72",
+  "requestId": "5774c0dc-3611-4e30-bbcf-c96852b81ddf",
+  "id": "ababefc5-11fd-495c-8cd0-b664b3a172d7"
+}

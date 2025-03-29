@@ -31,14 +31,6 @@ const ensureDirectories = async () => {
 
 ensureDirectories();
 
-// Load the C library
-// const logProcessor = ffi.Library(path.join(__dirname, '../../processor/build/liblogprocessor'), {
-//     'init_log_processor': ['int', []],
-//     'clean_up_processor': ['void', []],
-//     'process_log_entry': ['int', ['pointer']],
-//     'get_log_stats': ['int', ['pointer']],
-//     // Add other functions as needed
-// });
 
 // Initiliaze the C log Processor
 // logProcessor.init_log_processor();
@@ -59,6 +51,12 @@ export const processLog = async (logData) => {
 
     // Add the ID to the log data
     logData.id = logId;
+
+    // Add timestamp if not present
+    if (!logData.timestamp) {
+        logData.timestamp = new Date().toISOString();
+    }
+    // Add the ID to the log data
 
     // Store in memory for recent logs
     recentLogs.push(logData);
@@ -175,7 +173,7 @@ export const getLogStats = async () => {
     };
 
     recentLogs.forEach(log => {
-        const severity = getSeveroty(log);
+        const severity = getSeverity(log);
         if (severityCounts[severity] !== undefined) {
             severityCounts[severity]++;
         }
@@ -291,24 +289,38 @@ const getSeverity = (logData) => {
  * @returns {Promise<Object} - Analysis result
  */
 
-const analyzeLogWithPython = async (logData) => {
+const analyzeLogWithPython = (logData) => {
     return new Promise((resolve, reject) => {
-        const pythonProcess = spawn('python3', [path.join(__dirname, '../../analyzer/main.py'), JSON.stringify(logData)]);
-
-        let output = '';
-        pythonProcess.stdout.on('data', (data) => {
-            output += data.toString();
-        });
-
-        pythonProcess.strerr.on('data', (data) => {
-            logger.error(`Python stderr: ${data}`);
-        });
-
-        pythonProcess.on('close', (code) => {
-            if (code !== 0) {
-                return reject(new Error(`Python process exited with code ${code}`));
-            }
-            resolve(JSON.parse(output));
-        })
-    })
-}
+      const pythonProcess = spawn('python3', [path.join(__dirname, '../../analyzer/main.py'), JSON.stringify(logData)]);
+      
+      let output = '';
+      let errorOutput = '';
+      
+      pythonProcess.stdout.on('data', (data) => {
+        output += data.toString();
+      });
+      
+      pythonProcess.stderr.on('data', (data) => {
+        errorOutput += data.toString();
+      });
+      
+      pythonProcess.on('close', (code) => {
+        if (code !== 0) {
+          logger.error(`Python process exited with code ${code}: ${errorOutput}`);
+          return reject(new Error(`Python process exited with code ${code}`));
+        }
+        try {
+          const result = JSON.parse(output);
+          resolve(result);
+        } catch (e) {
+          logger.error(`Error parsing Python script output: ${e.message}`);
+          reject(new Error('Error parsing Python script output'));
+        }
+      });
+      
+      pythonProcess.on('error', (error) => {
+        logger.error(`Failed to start Python process: ${error.message}`);
+        reject(new Error('Failed to start Python process'));
+      });
+    });
+  };
